@@ -39,11 +39,11 @@ def callback(call):
             def search_data(message):
                 search_value = message.text
                 with open('phonebook.txt','r', encoding='utf-8') as file:
+                    count = 0
                     for line in file:
                         if search_value in line:
                             bot.send_message(message.chat.id, f'Вы искали {line}')
-                        # else:
-                        #     bot.send_message(call.message.chat.id, f'Такого человека тут нет') 
-                        # break
-
+                            count = count + 1
+                    if count == 0:
+                        bot.send_message(call.message.chat.id, f'Такого человека тут нет') 
 bot.polling(non_stop=True)
